@@ -112,7 +112,7 @@ var _ = {};
 
 		for (var i = 0, len = array.length; i < len; i += 1) {
 			temp = array[i];
-			
+
 			if(!hash.hasOwnProperty(temp)) { // if we haven't seen this before
 				hash[temp] = true;
 				result.push(temp); //only add it the first time.
@@ -128,6 +128,14 @@ var _ = {};
 		// map() is a useful primitive iteration function that works a lot
 		// like each(), but in addition to running the operation on all
 		// the members, it also maintains an array of results.
+
+		var result = [];
+
+		_.each(collection, function(e){
+			result.push(iterator(e));
+		});
+
+		return result;
 	};
 
 	/*
