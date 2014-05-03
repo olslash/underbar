@@ -60,7 +60,7 @@ var _ = {};
 		} else if (typeof collection === 'object') {
 			for (i in collection) {
 				if (collection.hasOwnProperty(i)) {
-									iterator(collection[i], i, collection);
+					iterator(collection[i], i, collection);
 				}
 			}
 		}
@@ -84,7 +84,17 @@ var _ = {};
 	};
 
 	// Return all elements of an array that pass a truth test.
-	_.filter = function(collection, test) {};
+	_.filter = function(collection, test) {
+		//iterate collection
+		//if test passes, add to result
+		var result = [];
+		_.each(collection, function(e, i, a){
+			if (test(e)) {
+				result.push(e);
+			}
+		});
+		return result;
+	};
 
 	// Return all elements of an array that don't pass a truth test.
 	_.reject = function(collection, test) {
