@@ -333,7 +333,20 @@ var _ = {};
 	// _.memoize should return a function that when called, will check if it has
 	// already computed the result for the given argument and return that value
 	// instead if possible.
-	_.memoize = function(func) {};
+	_.memoize = function(func) {
+		var store = {};
+
+		return function() {
+			var key = func + arguments[0];
+			console.log(key);
+			if (store.hasOwnProperty(key)) { 
+				return store[key];
+			} else {
+				store[key] = func.apply(this, arguments);
+				return store[key];
+			}
+		};
+	};
 
 	// Delays a function for the given number of milliseconds, and then calls
 	// it with the arguments supplied.
