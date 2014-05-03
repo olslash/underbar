@@ -231,13 +231,16 @@ var _ = {};
 			if (isFunction)
 				return test(item) ? true : false;
 			else
-				return item ? true : false;
+				return !!item;
 		}, true);
 	};
 	// Determine whether any of the elements pass a truth test. If no iterator is
 	// provided, provide a default one
 	_.some = function(collection, iterator) {
 		// TIP: There's a very clever way to re-use every() here.
+
+		
+
 	};
 
 
