@@ -273,7 +273,7 @@ var _ = {};
 	_.extend = function(obj) {
 		//grab the list of args, excluding first
 		var args = Array.prototype.slice.call(arguments, 1);
-		
+
 		_.each(args, function(el) { 
 			for (var p in el) { 
 				obj[p] = el[p];
@@ -284,8 +284,17 @@ var _ = {};
 
 	// Like extend, but doesn't ever overwrite a key that already
 	// exists in obj
-	_.defaults = function(obj) {};
+	_.defaults = function(obj) {
+		var args = Array.prototype.slice.call(arguments, 1);
 
+		_.each(args, function(el) {
+			for (var p in el) {
+				if (!obj.hasOwnProperty(p))
+					obj[p] = el[p];
+			}
+		});
+		return obj;
+	};
 
 	/**
 	 * FUNCTIONS
