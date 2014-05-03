@@ -187,13 +187,14 @@ var _ = {};
 	//   }, 0); // should be 6
 	_.reduce = function(collection, iterator, accumulator) {
 
-		var result = accumulator;//(accumulator || accumulator === 0) ? accumulator : collection[0];
+		var result = accumulator; //(accumulator || accumulator === 0) ? accumulator : collection[0];
+
 		_.each(collection, function(e) {
 			result = iterator(result, e);
-	});
+		});
+
 		return result;
 	};
-
 	// Determine if the array or object contains a given value (using `===`).
 	_.contains = function(collection, target) {
 		// TIP: Many iteration problems can be most easily expressed in
@@ -208,10 +209,31 @@ var _ = {};
 
 
 	// Determine whether all of the elements match a truth test.
-	_.every = function(collection, iterator) {
+	_.every = function(collection, test) {
+		function isEmpty(coll) {
+			if (coll.length === 0)
+				return true;
+			for (var k in coll) {
+				if (coll.hasOwnProperty(k))
+					return false;
+			}
+		}
 
+		if (isEmpty(collection)) {
+			return true; //pass by default for empty collections.
+		}
+
+		var isFunction = typeof test === 'function';
+
+		return _.reduce(collection, function(wasTrue, item) {
+			if (!wasTrue)
+				return false;
+			if (isFunction)
+				return test(item) ? true : false;
+			else
+				return item ? true : false;
+		}, true);
 	};
-
 	// Determine whether any of the elements pass a truth test. If no iterator is
 	// provided, provide a default one
 	_.some = function(collection, iterator) {
