@@ -372,8 +372,29 @@ var _ = {};
 	// TIP: This function's test suite will ask that you not modify the original
 	// input array. For a tip on how to make a copy of an array, see:
 	// http://mdn.io/Array.prototype.slice
-	_.shuffle = function(array) {};
+	_.shuffle = function(source) {
+		// http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+		// To shuffle an array a of n elements (indices 0..n-1):
+		// for i from 0 to n − 1 do
+		//      j ← random integer with i ≤ j < n
+		//      exchange a[j] and a[i]
 
+		function randomIntFromInterval(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+
+		var ary = source.slice(0);
+		var j, tempj;
+
+		for (var i = 0, len = source.length - 1; i < len; i += 1) {
+			j = randomIntFromInterval(i, len);
+			tempj = ary[j];
+			ary[j] = ary[i];
+			ary[i] = tempj;
+		}
+
+		return ary;
+	};
 
 	/**
 	 * Note: This is the end of the pre-course curriculum. Feel free to continue,
