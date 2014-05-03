@@ -223,15 +223,13 @@ var _ = {};
 			return true; //pass by default for empty collections.
 		}
 
-		var isFunction = typeof test === 'function';
+		test || (test = _.identity); //default to test value itself
 
 		return _.reduce(collection, function(wasTrue, item) {
 			if (!wasTrue)
 				return false;
-			if (isFunction)
+
 				return test(item) ? true : false;
-			else
-				return !!item;
 		}, true);
 	};
 	// Determine whether any of the elements pass a truth test. If no iterator is
@@ -239,8 +237,8 @@ var _ = {};
 	_.some = function(collection, iterator) {
 		// TIP: There's a very clever way to re-use every() here.
 
-		
 
+		
 	};
 
 
