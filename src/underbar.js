@@ -88,7 +88,7 @@ var _ = {};
 		//iterate collection
 		//if test passes, add to result
 		var result = [];
-		_.each(collection, function(e, i, a){
+		_.each(collection, function(e, i, a) {
 			if (test(e)) {
 				result.push(e);
 			}
@@ -100,13 +100,27 @@ var _ = {};
 	_.reject = function(collection, test) {
 		// TIP: see if you can re-use _.filter() here, without simply
 		// copying code in and modifying it
-		return _.filter(collection, function(num){
+		return _.filter(collection, function(num) {
 			return !test(num);
 		});
 	};
 
 	// Produce a duplicate-free version of the array.
-	_.uniq = function(array) {};
+	_.uniq = function(array) {
+		//use an object like a hash to store history and get quick lookups
+		var hash = {}, result = [], temp;
+
+		for (var i = 0, len = array.length; i < len; i += 1) {
+			temp = array[i];
+			
+			if(!hash.hasOwnProperty(temp)) { // if we haven't seen this before
+				hash[temp] = true;
+				result.push(temp); //only add it the first time.
+			} 
+		}
+
+		return result;
+	};
 
 
 	// Return the results of applying an iterator to each element.
