@@ -337,7 +337,7 @@ var _ = {};
 		var store = {};
 
 		return function() {
-			var key = func + arguments[0];
+			var key = Array.prototype.slice.call(arguments,0);
 			if (store.hasOwnProperty(key)) { 
 				return store[key];
 			} else {
